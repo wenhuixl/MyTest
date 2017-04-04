@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>点名统计 | 图表</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <link href="http://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.css" rel="stylesheet">
+    <style>
+        html,body{height:100%}
+        .swiper-container{height: 300px; background: whitesmoke;}
+        .state{width: 45px; height: 25px; float: right; color: white; text-align: center; line-height: 25px; font-size: 12px;}
+        .normal {background-color: green;}
+        .absence {background-color: red;}
+        .late{background-color: yellow;}
+        .early{background-color: orange;}
+        .leave{background-color: blue;}
+        .menu{width: 45px; height: 45px; float: right; background-color: aliceblue;}
+    </style>
+</head>
+<body>
+
+<div class="weui-cell">
+    <div class="weui-cell__hd"><label for="in" class="weui-label">爱好</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" id="in" type="text" value="画画,打球,游泳" readonly="" data-values="1,2,4">
+    </div>
+</div>
+
+<div class="weui-panel__bd">
+    <div class="weui-media-box weui-media-box_text">
+        <h4 class="weui-media-box__title">标题一<div class="menu"></div></h4>
+        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+    </div>
+</div>
+
+
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            报表1
+        </div>
+        <div class="swiper-slide">
+            报表2
+        </div>
+        <div class="swiper-slide">
+            报表3
+        </div>
+    </div>
+</div>
+
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__hd">考勤详情</div>
+    <div class="weui-panel__bd">
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+            <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb" src="">
+            </div>
+            <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title">标题一<div class="state normal">正常</div></h4>
+                <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+            </div>
+        </a>
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+            <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb" src="">
+            </div>
+            <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title">标题二<div class="state absence">缺勤</div></h4>
+                <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+<script src="http://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container',{
+        autoplay : 5000,//可选选项，自动滑动
+        loop : true,//可选选项，开启循环
+    })
+
+
+    $("#in").select({
+        title: "您的爱好",
+        multi: true,
+        min: 2,
+        max: 3,
+        items: [
+            {
+                title: "画画",
+                value: 1,
+                description: "额外的数据1"
+            },
+            {
+                title: "打球",
+                value: 2,
+                description: "额外的数据2"
+            },
+            {
+                title: "唱歌",
+                value: 3,
+                description: "额外的数据3"
+            },
+            {
+                title: "游泳",
+                value: 4,
+                description: "额外的数据4"
+            },
+            {
+                title: "健身",
+                value: 5,
+                description: "额外的数据5"
+            },
+            {
+                title: "睡觉",
+                value: 6,
+                description: "额外的数据6"
+            },
+        ],
+        beforeClose: function(values, titles) {
+            if(values.indexOf("6") !== -1) {
+                $.toast("不能选睡觉", "cancel");
+                return false;
+            }
+            return true;
+        },
+        onChange: function(d) {
+            console.log(this, d);
+        },
+        onClose: function (d) {
+            console.log('close')
+        }
+    });
+
+</script>
